@@ -1,6 +1,6 @@
-# NeoArealize
+# animats
 
-A model of reaction-diffusion pattern formation in neocortex.
+Pseudo-physical models of the interaction between animats and their environments. 
 
 Pre-requisites:
 
@@ -15,7 +15,7 @@ sudo apt install python python-numpy xterm
 Now build:
 
 ```bash
-cd NeoArealize
+cd animats
 mkdir build
 cd build
 cmake ..
@@ -25,11 +25,7 @@ cd ..
 
 To run:
 
-```bash
-python sim2.py
-```
-
-or, more recently, as I've removed the need for the sim.py master program, just
+Run using the following
 
 ```bash
 ./build/sim/process w0 logs/w0 1
