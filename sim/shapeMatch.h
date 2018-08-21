@@ -1,42 +1,9 @@
-/*
-///
-///  @file shapeMatch.h
-///  @brief Shape match algorithm
-///  @author Hiroki Urashima, Stuart P Wilson
-///  @date 01/04/2013
-///
-
-#ifndef ____shapeMatch__
-#define ____shapeMatch__
-*/
-
-#include "morph/display.h"
-#include "morph/tools.h"
-#include "morph/ReadCurves.h"
-#include "morph/HexGrid.h"
-#include "morph/HdfData.h"
-#include <iostream>
-#include <sstream>
-#include <string>
 #include <vector>
-#include <array>
-#include <iomanip>
-#include <cmath>
-#ifdef __GLN__
-#include <omp.h>
-#endif
-#include <unistd.h>
-
-#define DEBUG 1
-#define DBGSTREAM std::cout
-#include <morph/MorphDbg.h>
-
-//#include <vector>
 #include <armadillo>
 
 using namespace arma;
+using namespace std;
 
-//using std::vector;
 using arma::vec;
 using arma::mat;
 
