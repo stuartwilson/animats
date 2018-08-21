@@ -1,6 +1,6 @@
 # AUTOMOC requires 2.8.6. Per-target include directories would require 2.8.8
 cmake_minimum_required(VERSION 2.8.8)
-project(NeoArealize)
+project(animat)
 
 message(STATUS "Install prefix: ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "  (This can be changed with `cmake -DCMAKE_INSTALL_PREFIX=/some/place`")
@@ -29,6 +29,13 @@ if (APPLE)
 else()
   set(CMAKE_CXX_FLAGS "${MORPH_HOST_DEFINITION} -Wall -g -std=c++11 -fopenmp")
 endif()
+
+# The package managed version of armadillo8 on Ubuntu 18.04 LTS didn't
+# work, but was required for OpenCV, so it's useful to be able to
+# install a from-source build of Armadillo in /usr/local and link to
+# this.
+set(MORPH_ARMADILLO_LIBPATH "" CACHE PATH "The path to the armadillo library (e.g. /usr/local/lib)")
+
 
 # Lib finding - we have to do this, so that the correct include paths
 # are present for OpenGL, OpenCV, etc; they're all included by
