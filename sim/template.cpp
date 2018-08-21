@@ -3,6 +3,7 @@
  */
 #include "shapeMatch.h"
 #include "sphere.h"
+#include "phyllotaxis.h"
 
 #include "morph/display.h"
 #include <iostream>
@@ -60,6 +61,7 @@ int main (int argc, char **argv)
     int rseed = 1;
     srand(rseed);
 
+
     // Create some displays
     vector<morph::Gdisplay> displays;
     vector<double> fix(3, 0.0);
@@ -75,8 +77,16 @@ int main (int argc, char **argv)
     // Instantiate the model object
     ShapeMatch SM;
 
-    sphere S(7);
-    int N = S.sphereN*S.sphereN*6;
+
+    phyllotaxis S;
+
+    int N = S.N;
+
+
+
+    //sphere S(7);
+    //int N = S.sphereN*S.sphereN*6;
+
     vector<double> mass (N, 1.0/(double)N);
     vector<vector<int> > clusters(1);
     clusters.resize(1);
@@ -84,11 +94,15 @@ int main (int argc, char **argv)
     for(int i=0;i<N;i++){clusters[0][i]=i;}
     vector<int> boneIDs;
     vector<arma::vec> X;
-    for(int i=0;i<N;i++){X.push_back(S.sphereX[i]);};
+    for(int i=0;i<N;i++){
+        //X.push_back(S.sphereX[i]);
+        X.push_back(S.X[i]);
+
+    };
 
     try {
         SM.params.alpha = 0.2;
-        SM.params.beta = 1.0;
+        SM.params.beta = 0.1;
         SM.params.type = Quadratic;
         SM.params.dt = 0.01;
         SM.params.allowFlip = true;
