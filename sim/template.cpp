@@ -2,6 +2,8 @@
  * A template RD system
  */
 #include "shapeMatch.h"
+//#include "sphere.h"
+//#include "phyllotaxis.h"
 #include "shapes.h"
 
 #include "morph/display.h"
@@ -10,6 +12,7 @@
 #include <string>
 
 using namespace std;
+
 
 
 // PLANE BOUNDARY, E.G., FOR FLOOR
@@ -76,12 +79,14 @@ int main (int argc, char **argv)
     ShapeMatch SM;
 
 
-    //sphere S(200);
-
-    vector<phyllotaxis>
-    torus S(200);
+    sphere S(100);//,0.6,0.75);
 
     int N = S.N;
+
+
+
+    //sphere S(7);
+    //int N = S.sphereN*S.sphereN*6;
 
     vector<double> mass (N, 1.0/(double)N);
     vector<vector<int> > clusters(1);
@@ -91,6 +96,7 @@ int main (int argc, char **argv)
     vector<int> boneIDs;
     vector<arma::vec> X;
     for(int i=0;i<N;i++){
+        //X.push_back(S.sphereX[i]);
         X.push_back(S.X[i]);
 
     };
@@ -109,6 +115,8 @@ int main (int argc, char **argv)
         cerr << "Exception initialising SM object: " << e.what() << endl;
     }
 
+
+
     // Start the loop
     bool finished = false;
     while (!finished) {
@@ -118,7 +126,7 @@ int main (int argc, char **argv)
             SM.projectPositions();
             boundary(SM, -1.5, 2, 0.5, 0);
             SM.integrate();
-
+            //SM.step();
         } catch (const exception& e) {
             cerr << "Caught exception calling SM.step(): " << e.what() << endl;
             finished = true;
@@ -138,7 +146,25 @@ int main (int argc, char **argv)
             cerr << "Caught exception calling SM.plot(): " << e.what() << endl;
             finished = true;
         }
+        /*
+        try {
+            SM.plot (displays);
+            // Save some frames
+            if (SM.stepCount % 100 == 0) {
+                //RD.saveStuff();
+            }
 
+        } catch (const exception& e) {
+            cerr << "Caught exception calling SM.plot(): " << e.what() << endl;
+            finished = true;
+        }
+
+
+        // Halt after how every many iterations suits your model:
+        if (SM.stepCount > 100) {
+            finished = true;
+        }
+         */
     }
 
     return 0;
